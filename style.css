@@ -221,7 +221,9 @@ a{
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: contain;
+    transform: scale3d(1.5, 1, 1.5);
+
 }
 
 /* Dock Styles */
@@ -594,6 +596,11 @@ a{
 
     .slide img {
         object-fit: contain; /* Ensure images fit within the slider */
+        transform: scale3d(1,1,1.5);
+    }
+    .slider-dots{
+        position: relative;
+        margin-top: 23px;
     }
 }
 
