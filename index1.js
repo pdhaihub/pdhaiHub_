@@ -1242,3 +1242,4 @@ function calculateSGPA() {
 }
 
 
+document.addEventListener('DOMContentLoaded', initializeSlider);
