@@ -171,11 +171,36 @@ body {
 .slider-container {
     width: 80%;
     max-width: 1200px;
-    height: 400px;
+    height: 400px; /* Adjust this height as needed */
     overflow: hidden;
     position: relative;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 10px; /* Adjust this value as needed */
+    width: 100%;
+    z-index: 10; /* Ensure dots are above the slider */
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: var(--primary-color);
 }
 
 a{
@@ -190,11 +215,9 @@ a{
 }
 
 .slide {
-  
     width: 33.333%;
     height: 100%;
 }
-
 .slide img {
     width: 100%;
     height: 100%;

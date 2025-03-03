@@ -33,21 +33,22 @@ function handleTouchEnd() {
 
 
 function initializeSlider() {
-    // const dotsContainer = document.querySelector('.slider-dots');
-    // dotsContainer.innerHTML = '';
+    const dotsContainer = document.querySelector('.slider-dots');
+    dotsContainer.innerHTML = ''; // Clear any existing dots
+
     for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
-        if (i === 0) dot.classList.add('active');
+        if (i === 0) dot.classList.add('active'); // Set the first dot as active
         dot.onclick = () => goToSlide(i);
-        // dotsContainer.appendChild(dot);
+        dotsContainer.appendChild(dot);
     }
     startSlideShow();
 }
 
 function startSlideShow() {
     if (slideInterval) clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, 3000);
+    slideInterval = setInterval(nextSlide, 5000);
 }
 
 function pauseSlideShow() {
@@ -72,10 +73,13 @@ function goToSlide(index) {
 
 function updateSlider() {
     const slider = document.querySelector('.slider');
-    slider.style.transform =`translateX(-${currentSlide * 100 / totalSlides}%)`;
-    // document.querySelectorAll('.dot').forEach((dot, index) => {
-    //     dot.classList.toggle('active', index === currentSlide);
-    // });
+    slider.style.transform = `translateX(-${currentSlide * 100 / totalSlides}%)`;
+
+    // Update the active dot
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
 }
 
 function showSection(section) {
