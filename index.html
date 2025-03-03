@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PDHAI HUB - PYQ</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="logo">
+                <span class="pdhai">PDHAI</span>
+                <span class="hub-box">HUB</span>
+            </div>
+        </header>
+
+        <div class="main-wrapper">
+            <div class="banner-wrapper">
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img
+                                src="padhaihub2.png"
+                                alt="Campus 1"
+                            />
+                        </div>
+                        <div class="slide">
+                            <img
+                                src=""
+                                alt="Campus 2"
+                            />
+                        </div>
+                        <div class="slide">
+                            <img
+                                src=""
+                                alt="Campus 3"
+                            />
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+
+            <div class="container" id="mainContent"></div>
+        </div>
+
+        <div class="dock-container" id="dockc">
+            <div class="dock">
+                <a href="https://pdhaihub.github.io/pdhaiHub/">
+                    <div class="dock-item" onclick="showSection('home')">
+                        <i class="fas fa-home"></i
+                        ><span class="tooltip">Home</span>
+                    </div>
+                </a>
+                <div class="dock-item" onclick="showSection('pyq')">
+                    <i class="fas fa-file-alt"></i
+                    ><span class="tooltip">PYQ</span>
+                </div>
+                <div class="dock-item" onclick="showSection('lectures')">
+                    <i class="fas fa-chalkboard-teacher"></i
+                    ><span class="tooltip">Lectures</span>
+                </div>
+                <div class="dock-item" onclick="showSection('tutorials')">
+                    <i class="fas fa-book"></i
+                    ><span class="tooltip">Tutorials</span>
+                </div>
+                <div class="dock-item" onclick="showSection('professors')">
+                    <i class="fas fa-user-tie"></i
+                    ><span class="tooltip">Prof.</span>
+                </div>
+                <div class="dock-item" onclick="showSection('cgpa')">
+                    <i class="fas fa-calculator"></i
+                    ><span class="tooltip1">CGPA Calc.</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <span>Made with frustration by LENDEES</span>
+            <span class="emoji">😤</span>
+        </footer>
+
+        <script src="index1.js"></script>
+        <script src="subjectdrivelinks.js"></script>
+        <!-- <script src="pyq.js"></script> -->
+        <script src="proffessor.js"></script>
+    </body>
+</html>
