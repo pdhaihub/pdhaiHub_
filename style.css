@@ -610,6 +610,10 @@ a{
         min-width: 250px; /* Smaller card width */
     }
 
+    .desktop{
+        display: none;
+    }
+
     .professor-card-item img {
         width: 80px; /* Smaller image */
         height: 80px;
