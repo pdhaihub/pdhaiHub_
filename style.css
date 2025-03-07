@@ -48,6 +48,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 7px;
 }
 
 .logo {
@@ -545,6 +546,9 @@ a{
 
     .footer {
         font-size: 0.9rem; /* Smaller footer text */
+    }
+    .header{
+        margin-bottom: 17px;
     }
 }
 
