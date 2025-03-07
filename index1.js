@@ -9,7 +9,10 @@ let touchEndX = 0;
 let slideInterval;
 
 
-
+document.addEventListener("DOMContentLoaded", function () {
+    initializeLectures();
+    initializeTutorials();
+});
 
 function handleTouchStart(e) {
     touchStartX = e.touches[0].clientX;
@@ -183,7 +186,7 @@ function initializePYQ() {
     streamSelect.addEventListener("change", () => {
         if (streamSelect.value) {
             semesterSelect.disabled = false;
-            populateSemesters();
+            populateSemesters(semesterSelect);
         } else {
             semesterSelect.disabled = true;
             subjectSelect.disabled = true;
@@ -194,7 +197,7 @@ function initializePYQ() {
     semesterSelect.addEventListener("change", () => {
         if (semesterSelect.value) {
             subjectSelect.disabled = false;
-            populateSubjects(getSubjectsBySemester(semesterSelect.value));
+            populateSubjects(getSubjectsBySemesterAndStream(streamSelect.value,semesterSelect.value));
         } else {
             subjectSelect.disabled = true;
             downloadBtn.disabled = true;
@@ -208,41 +211,39 @@ function initializePYQ() {
     downloadBtn.addEventListener("click", handleDownload);
 }
 
-function populateSemesters() {
-    const semesterSelect = document.getElementById('semesterSelect');
-    semesterSelect.innerHTML = '<option value="">Select Semester</option>';
-    for (let i = 1; i <= 8; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = `Semester ${i}`;
-        semesterSelect.appendChild(option);
-    }
-}
 
-function populateSubjects(subjectList) {
-    const subjectSelect = document.getElementById('subjectSelect');
+function populateSubjects(subjectSelect, semester, type) {
     subjectSelect.innerHTML = '<option value="">Select Subject</option>';
-    subjectList.forEach(subject => {
+
+    const streamSelect = document.getElementById(type === 'lectures' ? 'lectureStreamSelect' : 'tutorialStreamSelect');
+    const selectedStream = streamSelect.value;
+    
+    const subjects = getSubjectsBySemesterAndStream(selectedStream, semester, type);
+
+    if (subjects.length === 0) {
+        console.warn("No subjects found for:", selectedStream, semester, type);
+    }
+
+    subjects.forEach(subject => {
         const option = document.createElement('option');
-        option.value = subject.toLowerCase().replace(/\s+/g, '-');
+        const formattedSubject = subject.toLowerCase().replace(/\s+/g, '-');
+        option.value = formattedSubject;
         option.textContent = subject;
         subjectSelect.appendChild(option);
     });
 }
 
-function getSubjectsBySemester(semester) {
-    const subjects = {
-        1: ["Workshop", "SDF-1", "Physics-1", "Mathematics-1","English","Basic Electronics"],
-        2: ["Mathematics II", "Basic Electrical Engineering", "Engineering Mechanics", "Environmental Science"],
-        3: ["Data Structures", "Digital Logic", "Object-Oriented Programming", "Discrete Mathematics"],
-        4: ["Algorithms", "Computer Organization", "Operating Systems", "Database Systems"],
-        5: ["Computer Networks", "Software Engineering", "Theory of Computation", "Artificial Intelligence"],
-        6: ["Machine Learning", "Web Development", "Compiler Design", "Cloud Computing"],
-        7: ["Distributed Systems", "Blockchain Technology", "Cybersecurity", "IoT"],
-        8: ["Big Data", "Quantum Computing", "Natural Language Processing", "Advanced Algorithms"]
-    };
-    return subjects[semester] || [];
+function getSubjectsBySemesterAndStream(stream, semester, type) {
+    if (type === 'lectures') {
+        return lectureSubjectsBySemester[stream]?.[semester] || [];
+    } else if (type === 'tutorials') {
+        return tutorialSubjectsBySemester[stream]?.[semester] || [];
+    }
+    return [];
 }
+
+
+
 
 function handleDownload() {
     const streamSelect = document.getElementById('streamSelect');
@@ -295,6 +296,7 @@ function showLectures() {
     initializeLectures();
 }
 
+
 function initializeLectures() {
     const streamSelect = document.getElementById("lectureStreamSelect");
     const semesterSelect = document.getElementById("lectureSemesterSelect");
@@ -302,35 +304,24 @@ function initializeLectures() {
     const downloadBtn = document.getElementById("lectureDownloadBtn");
 
     streamSelect.addEventListener("change", () => {
-        if (streamSelect.value) {
-            semesterSelect.disabled = false;
-            populateLectureSemesters();
-        } else {
-            semesterSelect.disabled = true;
-            subjectSelect.disabled = true;
-            downloadBtn.disabled = true;
-        }
+        semesterSelect.disabled = !streamSelect.value;
+        subjectSelect.disabled = true;
+        downloadBtn.disabled = true;
+        populateLectureSemesters();
     });
 
     semesterSelect.addEventListener("change", () => {
-        if (semesterSelect.value && streamSelect.value) {
-            subjectSelect.disabled = false;
-            populateLectureSubjects(getLectureSubjectsByStreamAndSemester(streamSelect.value, semesterSelect.value));
-        } else {
-            subjectSelect.disabled = true;
-            downloadBtn.disabled = true;
-        }
+        subjectSelect.disabled = !semesterSelect.value;
+        downloadBtn.disabled = true;
+        populateSubjects(subjectSelect, semesterSelect.value, 'lectures');
     });
 
     subjectSelect.addEventListener("change", () => {
-        if (subjectSelect.value) {
-            downloadBtn.disabled = false; // Enable the button when a subject is selected
-        } else {
-            downloadBtn.disabled = true;
-        }
+        downloadBtn.disabled = !subjectSelect.value;
     });
+    
+    document.getElementById("lectureDownloadBtn").addEventListener("click", handleLectureDownload);
 
-    downloadBtn.addEventListener("click", handleLectureDownload);
 }
 
 function populateLectureSemesters() {
@@ -356,8 +347,8 @@ function populateLectureSubjects(subjectList) {
 }
 
 // Updated function to get subjects based on both stream and semester
-function getLectureSubjectsByStreamAndSemester(stream, semester) {
-    const subjects = {
+const lectureSubjectsBySemester ={
+   
         "CSE": {
             1: ["Workshop", "SDF-1", "Physics-1", "Mathematics-1", "English", "Basic Electronics"],
             2: ["Software Development Fundamentals – II", "Electrical Science -1", "Mathematics 2", "Physics-2", "EDD", "Life Skills And Effective Communication"],
@@ -388,33 +379,56 @@ function getLectureSubjectsByStreamAndSemester(stream, semester) {
             7: ["Discipline Elective -- 4", "Discipline Elective -- 5", "Discipline Elective -- 6", "Open Elective -- 2"],
             8: ["Discipline Elective -- 7", "Discipline Elective -- 8", "Open Elective -3"]
         }
-    };
+   
 
-    // Return subjects for the selected stream and semester
-    return subjects[stream]?.[semester] || [];
+  
 }
 
 
 function handleLectureDownload() {
-    const streamSelect = document.getElementById('lectureStreamSelect');
-    const semesterSelect = document.getElementById('lectureSemesterSelect');
-    const subjectSelect = document.getElementById('lectureSubjectSelect');
+    const streamSelect = document.getElementById('lectureStreamSelect').value;
+    const semesterSelect = parseInt(document.getElementById('lectureSemesterSelect').value);
+    const subjectSelect = document.getElementById('lectureSubjectSelect').value;
 
-    const selectedStream = streamSelect.value; // Get selected stream
-    const selectedSemester = parseInt(semesterSelect.value); // Get selected semester
-    const selectedSubject = subjectSelect.value; // Get selected subject
+    if (!streamSelect || !semesterSelect || !subjectSelect) {
+        alert("Please select stream, semester, and subject first!");
+        return;
+    }
 
-    // Fetch the link from the subjectDriveLinks object
-    const driveLink = subjectDriveLinks[selectedStream]?.[selectedSemester]?.[selectedSubject];
+    console.log(`Fetching link for Stream: ${streamSelect}, Semester: ${semesterSelect}, Subject: ${subjectSelect}`);
+
+    const driveLink = subjectDriveLinks[streamSelect]?.[semesterSelect]?.[subjectSelect];
 
     if (driveLink) {
-        // Open the Google Drive link in a new tab
+        console.log("Opening link:", driveLink);
         window.open(driveLink, '_blank');
     } else {
-        alert("No link found for the selected subject.");
+        alert("No link found for the selected subject. Check the subject name in subjectDriveLinks.js.");
     }
 }
+
 /*----------------------------tutorial------------------------------------------------*/
+
+const tutorialSubjectsBySemester = {
+    "CSE": {
+        1: ["Workshop", "SDF-1", "Physics-1", "Mathematics-1", "English", "Basic Electronics"],
+        2: ["Mathematics II", "SDF-2", "Electrical Science-1", "Physics-2", "EDD", "Life Skills And Effective Communication"],
+        // Add more semesters and subjects as needed
+    },
+    "ECE": {
+        1: ["Workshop", "SDF-1", "Physics-1", "Mathematics-1", "English", "Basic Electronics"],
+        2: ["Mathematics II", "SDF-2", "Electrical Science-1", "Physics-2", "EDD", "Life Skills And Effective Communication"],
+        // Add more semesters and subjects as needed
+    },
+    "BIOTECH": {
+        1: ["Basic Mathematics-1", "Physics for Biotechnology", "Fundamentals of Computers & Programming - I", "English", "Workshop"],
+        2: ["Basic Mathematics-2", "Electrical Science -1", "Biophysical Techniques", "Fundamentals of Computers & Programming - II", "Engineering Drawing and Design", "Life skills and effective communication"],
+        // Add more semesters and subjects as needed
+    }
+};
+
+
+
 
 function showTutorials() {
     const Images = document.querySelector('.banner-wrapper');
@@ -505,13 +519,9 @@ function showTutorialDownloads() {
                     <option value="">Select Subject</option>
                 </select>
 
-                <select id="tutorialSelect" class="custom-select" disabled>
-                    <option value="">Select Tutorial</option>
-                </select>
-
                 <button id="tutorialDownloadBtn" class="dock-style-btn" disabled>
                     <i class="fas fa-download"></i>
-                    Download Tutorial
+                    Show Tutorial
                 </button>
             </div>
         </div>
@@ -540,13 +550,9 @@ function showTutorialSolutions() {
                     <option value="">Select Subject</option>
                 </select>
 
-                <select id="solutionSelect" class="custom-select" disabled>
-                    <option value="">Select Tutorial Solution</option>
-                </select>
-
                 <button id="solutionDownloadBtn" class="dock-style-btn" disabled>
                     <i class="fas fa-download"></i>
-                    Download Solution
+                    Show Tut-Solution
                 </button>
             </div>
         </div>
@@ -558,23 +564,8 @@ function initializeTutorialDownloads() {
     const streamSelect = document.getElementById("tutorialStreamSelect");
     const semesterSelect = document.getElementById("tutorialSemesterSelect");
     const subjectSelect = document.getElementById("tutorialSubjectSelect");
-    const tutorialSelect = document.getElementById("tutorialSelect");
     const downloadBtn = document.getElementById("tutorialDownloadBtn");
 
-    setupSelectionHandlers(streamSelect, semesterSelect, subjectSelect, tutorialSelect, downloadBtn, 'tutorial');
-}
-
-function initializeTutorialSolutions() {
-    const streamSelect = document.getElementById("solutionStreamSelect");
-    const semesterSelect = document.getElementById("solutionSemesterSelect");
-    const subjectSelect = document.getElementById("solutionSubjectSelect");
-    const solutionSelect = document.getElementById("solutionSelect");
-    const downloadBtn = document.getElementById("solutionDownloadBtn");
-
-    setupSelectionHandlers(streamSelect, semesterSelect, subjectSelect, solutionSelect, downloadBtn, 'solution');
-}
-
-function setupSelectionHandlers(streamSelect, semesterSelect, subjectSelect, itemSelect, downloadBtn, type) {
     streamSelect.addEventListener("change", () => {
         if (streamSelect.value) {
             semesterSelect.disabled = false;
@@ -582,7 +573,76 @@ function setupSelectionHandlers(streamSelect, semesterSelect, subjectSelect, ite
         } else {
             semesterSelect.disabled = true;
             subjectSelect.disabled = true;
-            itemSelect.disabled = true;
+            downloadBtn.disabled = true;
+        }
+    });
+
+    semesterSelect.addEventListener("change", () => {
+        if (semesterSelect.value && streamSelect.value) {
+            subjectSelect.disabled = false;
+            populateSubjects(subjectSelect, semesterSelect.value, 'tutorials');
+        } else {
+            subjectSelect.disabled = true;
+            downloadBtn.disabled = true;
+        }
+    });
+
+    subjectSelect.addEventListener("change", () => {
+        if (subjectSelect.value) {
+            downloadBtn.disabled = false;
+        } else {
+            downloadBtn.disabled = true;
+        }
+    });
+
+    downloadBtn.addEventListener("click", () => handleDownloadItem('tutorials', {
+        stream: streamSelect.value,
+        semester: semesterSelect.value,
+        subject: subjectSelect.options[subjectSelect.selectedIndex].text
+    }));
+}
+
+function initializeTutorialSolutions() {
+    const streamSelect = document.getElementById("solutionStreamSelect");
+    const semesterSelect = document.getElementById("solutionSemesterSelect");
+    const subjectSelect = document.getElementById("solutionSubjectSelect");
+    const downloadBtn = document.getElementById("solutionDownloadBtn");
+
+    setupSelectionHandlers(streamSelect, semesterSelect, subjectSelect, downloadBtn, 'tutorials');
+}
+
+function initializeTutorials() {
+    const streamSelect = document.getElementById("tutorialStreamSelect");
+    const semesterSelect = document.getElementById("tutorialSemesterSelect");
+    const subjectSelect = document.getElementById("tutorialSubjectSelect");
+    const downloadBtn = document.getElementById("tutorialDownloadBtn");
+
+    streamSelect.addEventListener("change", () => {
+        semesterSelect.disabled = !streamSelect.value;
+        subjectSelect.disabled = true;
+        downloadBtn.disabled = true;
+        populateTutorialSemesters();
+    });
+
+    semesterSelect.addEventListener("change", () => {
+        subjectSelect.disabled = !semesterSelect.value;
+        downloadBtn.disabled = true;
+        populateSubjects(subjectSelect, semesterSelect.value, 'tutorials');
+    });
+
+    subjectSelect.addEventListener("change", () => {
+        downloadBtn.disabled = !subjectSelect.value;
+    });
+}
+
+function setupSelectionHandlers(streamSelect, semesterSelect, subjectSelect, downloadBtn, type) {
+    streamSelect.addEventListener("change", () => {
+        if (streamSelect.value) {
+            semesterSelect.disabled = false;
+            populateSemesters(semesterSelect);
+        } else {
+            semesterSelect.disabled = true;
+            subjectSelect.disabled = true;
             downloadBtn.disabled = true;
         }
     });
@@ -590,37 +650,33 @@ function setupSelectionHandlers(streamSelect, semesterSelect, subjectSelect, ite
     semesterSelect.addEventListener("change", () => {
         if (semesterSelect.value) {
             subjectSelect.disabled = false;
-            populateSubjects(subjectSelect, getSubjectsBySemester(semesterSelect.value));
+            populateSubjects(subjectSelect, semesterSelect.value, type);
         } else {
             subjectSelect.disabled = true;
-            itemSelect.disabled = true;
             downloadBtn.disabled = true;
         }
     });
 
     subjectSelect.addEventListener("change", () => {
-        if (subjectSelect.value) {
-            itemSelect.disabled = false;
-            populateItems(itemSelect, type);
-        } else {
-            itemSelect.disabled = true;
-            downloadBtn.disabled = true;
-        }
-    });
-
-    itemSelect.addEventListener("change", () => {
-        downloadBtn.disabled = !itemSelect.value;
+        downloadBtn.disabled = !subjectSelect.value;
     });
 
     downloadBtn.addEventListener("click", () => handleDownloadItem(type, {
         stream: streamSelect.value,
         semester: semesterSelect.value,
-        subject: subjectSelect.options[subjectSelect.selectedIndex].text,
-        item: itemSelect.options[itemSelect.selectedIndex].text
+        subject: subjectSelect.options[subjectSelect.selectedIndex].text
     }));
 }
 
+
 function populateSemesters(select) {
+
+  
+    if (!select) {
+        console.error("Semester select dropdown not found!");
+        return;
+    }
+
     select.innerHTML = '<option value="">Select Semester</option>';
     for (let i = 1; i <= 8; i++) {
         const option = document.createElement('option');
@@ -630,15 +686,8 @@ function populateSemesters(select) {
     }
 }
 
-function populateSubjects(select, subjects) {
-    select.innerHTML = '<option value="">Select Subject</option>';
-    subjects.forEach(subject => {
-        const option = document.createElement('option');
-        option.value = subject.toLowerCase().replace(/\s+/g, '-');
-        option.textContent = subject;
-        select.appendChild(option);
-    });
-}
+
+
 
 function populateItems(select, type) {
     select.innerHTML = `<option value="">Select ${type === 'tutorial' ? 'Tutorial' : 'Solution'}</option>`;
@@ -651,8 +700,8 @@ function populateItems(select, type) {
 }
 
 function handleDownloadItem(type, info) {
-    console.log(`Downloading ${type}: ${info.stream} - Semester ${info.semester} - ${info.subject} - ${info.item}`);
-    alert(`Download started for:\n${info.stream} - Semester ${info.semester} - ${info.subject}\n${info.item}`);
+    console.log(`Downloading ${type}: ${info.stream} - Semester ${info.semester} - ${info.subject}`);
+    alert(`Download started for:\n${info.stream} - Semester ${info.semester} - ${info.subject}`);
 }
 
 /*------------------------professors------------------------*/
