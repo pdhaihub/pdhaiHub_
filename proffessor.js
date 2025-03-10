@@ -1695,142 +1695,142 @@ const professors = [
     },
     {
         name: "NIDHI BATRA",
-        email: "john1.smith@college.edu",
+        email: "nidhi.batra@jiit.ac.in",
         department: "BIO",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/fac3_0.jpg"
     },
     {
         name: "SAPNA YADAV",
         email: "john1.smith@college.edu",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://scholar.googleusercontent.com/citations?view_op=view_photo&user=8tYioiEAAAAJ&citpid=1"
     },
     {
         name: "RICHA CHAUHAN",
-        email: "john1.smith@college.edu",
+        email: "richachauhan1986@gmail.com",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: ""
     },
     {
         name: "PURWA SRIVASTAVA",
-        email: "john1.smith@college.edu",
+        email: "purwa.srivastava@mail.jiit.ac.in",
         department: "HSS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/fac3.jpg"
     },
     {
         name: "NIKHIL YADAV",
         email: "john1.smith@college.edu",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://scholar.googleusercontent.com/citations?view_op=view_photo&user=oB51FhYAAAAJ&citpid=2"
     },
     {
         name: "ANKITA JAISWAL",
-        email: "john1.smith@college.edu",
+        email: "ankita.jaiswal@jiit.ac.in",
         department: "CSE/IT",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/Dr.%20Ankita%20Jaiswal.png"
     },
     {
         name: "RISHIBRIND KUMAR UPADHYAY",
-        email: "john1.smith@college.edu",
+        email: "rishibrind.upadhyay@jiit.ac.in",
         department: "ECE",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/rishi%20pic.jpg"
     },
     {
         name: "TARUN AGRAWAL",
-        email: "john1.smith@college.edu",
+        email: "tarun.agrawal@mail.jiit.ac.in",
         department: "CSE/IT",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/faculty%20foto%202.jpg"
     },
     {
         name: "ANIRUDH SHARMA",
-        email: "john1.smith@college.edu",
+        email: "anirudh.sharma@jiit.ac.in",
         department: "BIO",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/fac1_0.jpg"
     },
     {
         name: "INDRANI CHAKRABORTY",
-        email: "john1.smith@college.edu",
+        email: "indrani.chakraborty@jiit.ac.in",
         department: "PMSE",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/Indrani_.jpg"
     },
     {
         name: "SHIVANGI SAXENA",
         email: "john1.smith@college.edu",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: ""
     },
     {
         name: "RADHA KRISHNA GOPAL",
         email: "john1.smith@college.edu",
         department: "PMSE",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://scholar.googleusercontent.com/citations?view_op=view_photo&user=29zZqs8AAAAJ&citpid=1"
     },
     {
         name: "YOGITA DWIVEDI",
         email: "john1.smith@college.edu",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: ""
     },
     {
         name: "JASMIN",
-        email: "john1.smith@college.edu",
+        email: "ghazaala.yasmin@mail.jiit.ac.in",
         department: "CSE/IT",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/f1.jpg"
     },
     {
         name: "POOJA CHOUDHARY",
-        email: "john1.smith@college.edu",
+        email: "pooja.choudhary@jiit.ac.in",
         department: "BIO",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/pooja%2015092022.jpg"
     },
     {
         name: "NEETIMA AGARWAL",
         email: "john1.smith@college.edu",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: ""
     },
     {
         name: "SUNIL KUMAR YADAV",
         email: "john1.smith@college.edu",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://jbs.ac.in/upload/faculty/31/SunilKumarYadav.jpg"
     },
     {
         name: "NIBHA SINHA",
-        email: "john1.smith@college.edu",
+        email: "https://www.jiit.ac.in/sites/default/files/fac5.jpg",
         department: "HSS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "nibha.sinha@mail.jiit.ac.in"
     },
     {
         name: "ASHUTOSH SHUKLA",
         email: "john1.smith@college.edu",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://jbs.ac.in/upload/faculty/24/ashutoshshukla.jpg"
     },
     {
         name: "RITU RAJ",
-        email: "john1.smith@college.edu",
+        email: "rituraj@jiit.ac.in",
         department: "ECE",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/ritu%20raj%20foto.jpg"
     }
 ]
