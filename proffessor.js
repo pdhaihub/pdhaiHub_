@@ -29,10 +29,10 @@ const professors = [
     },
     {
         name: "ANUBHA VASHISHT",
-        email: "john1.smith@college.edu",
+        email: "anubha.vashisht@jiit.ac.in",
         department: "JBS",
         experience: 10,
-        image: "https://jiit.irins.org/assets/profile_images/532025.jpg"
+        image: "https://www.jiit.ac.in/sites/default/files/anubha.jpg"
     },
     {
         name: "ANSHU BANWARI",
