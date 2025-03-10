@@ -8,6 +8,33 @@ let touchStartX = 0;
 let touchEndX = 0;
 let slideInterval;
 
+const slider = document.querySelector('.slider');
+slider.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    pauseSlideShow(); // Pause the auto-slide when user interacts
+});
+
+slider.addEventListener('touchmove', (e) => {
+    touchEndX = e.touches[0].clientX;
+});
+
+
+slider.addEventListener('touchend', () => {
+    const diff = touchStartX - touchEndX;
+    const swipeThreshold = 50; // Minimum swipe distance to trigger slide change
+
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            nextSlide(); // Swipe left to go to the next slide
+        } else {
+            prevSlide(); // Swipe right to go to the previous slide
+        }
+    }
+
+    touchStartX = 0;
+    touchEndX = 0;
+    startSlideShow(); // Resume auto-slide after user interaction
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     initializeLectures();
