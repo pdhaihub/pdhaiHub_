@@ -10,10 +10,49 @@
 </head>
 
 <body>
+
     <header class="header">
         <div class="logo">
             <span class="pdhai">PDHAI</span>
             <span class="hub-box">HUB</span>
+        </div>
+
+        <!-- Sidebar Button and Dropdowns -->
+        <div class="sidebar-button">
+            <button class="sidebar-toggle">☰</button>
+            <div class="dropdown-content">
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleDropdown('contacts')">Contacts</button>
+                    <div class="dropdown-content" id="contactsDropdown">
+                        <!-- LinkedIn Dropdown -->
+                        <div class="dropdown">
+                            <button class="dropbtn" onclick="toggleDropdown('linkedin')">LinkedIn</button>
+                            <div class="dropdown-content" id="linkedinDropdown">
+                                <a href="https://www.linkedin.com/in/devanshu-gupta-676057250/" target="_blank">Devanshu Gupta</a>
+                                <a href="https://www.linkedin.com/in/faisal-safiq/" target="_blank">Faisal Safiq</a>
+                                <a href="https://www.linkedin.com/in/mueed-manzoor-0366a9a5/" target="_blank">Mueed Manzoor </a>
+                                <a href="https://www.linkedin.com/in/anubhav-yadav-198a30259/" target="_blank">Anubhav yadav </a>
+                            </div>
+                        </div>
+                        <!-- Instagram Dropdown -->
+                        <div class="dropdown">
+                            <button class="dropbtn" onclick="toggleDropdown('instagram')">Instagram</button>
+                            <div class="dropdown-content" id="instagramDropdown">
+                                <a href="https://www.instagram.com/_devu27/" target="_blank">Devanshu Gupta</a>
+                                <a href="https://www.instagram.com/safiqfaisal/" target="_blank">Faisal Safiq</a>
+                                <a href="https://www.instagram.com/mueed_mzr/" target="_blank">Mueed Manzoor </a>
+                                <a href="https://www.instagram.com/anubhav_yadav2210/" target="_blank">Anubhav yadav </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Community</button>
+                    <div class="dropdown-content">
+                        <a href="https://drive.google.com/drive/folders/19WmlKMkMdysMfsZp93deX-igdqR-Rz5O?usp=sharing" target="_blank">Community Drive</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -22,15 +61,15 @@
             <div class="slider-container">
                 <div class="slider">
                     <div class="slide">
-                        <img src="mainbanner(desktop).png" alt="Campus 1" class="desktop"/>
-                        <img src="mainbanner(mobile).png" alt="" class="mobile" >
+                        <img src="mainbanner(desktop).png" alt="Campus 1" class="desktop" />
+                        <img src="mainbanner(mobile).png" alt="" class="mobile">
                     </div>
                     <div class="slide">
-                        <img src="mainbanner(desktop).png" alt="Campus 1" class="desktop"/>
-                        <img src="mainbanner(mobile).png" alt="" class="mobile" >
+                        <img src="mainbanner(desktop).png" alt="Campus 1" class="desktop" />
+                        <img src="mainbanner(mobile).png" alt="" class="mobile">
                     </div>
                     <div class="slide">
-                        <img src="mainbanner(desktop).png" alt="Campus 3" class="desktop"/>
+                        <img src="mainbanner(desktop).png" alt="Campus 3" class="desktop" />
                         <img src="mainbanner(mobile).png" alt="" class="mobile">
                     </div>
                 </div>

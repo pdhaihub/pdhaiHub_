@@ -18,6 +18,37 @@ slider.addEventListener('touchmove', (e) => {
     touchEndX = e.touches[0].clientX;
 });
 
+// function toggleDropdown(dropdownId) {
+//     const dropdown = document.getElementById(`${dropdownId}Dropdown`);
+//     if (dropdown.style.display === "block") {
+//         dropdown.style.display = "none";
+//     } else {
+//         dropdown.style.display = "block";
+//     }
+// }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebarToggle = document.querySelector(".sidebar-toggle");
+    const dropdownContent = document.querySelector(".dropdown-content");
+
+    sidebarToggle.addEventListener("click", function () {
+
+
+        if (dropdownContent.style.display === "flex") {
+            dropdownContent.style.display = "none";
+            if(window.innerWidth < 768){
+                document.querySelector(".header").classList.toggle("unset");
+             }
+        } else {
+            dropdownContent.style.display = "flex";
+            dropdownContent.style.flexDirection = "column";
+            dropdownContent.style.rowGap = "0.5rem";
+            if(window.innerWidth < 768){
+                document.querySelector(".header").classList.toggle("unset");
+             }
+        }
+    });
+});
 
 slider.addEventListener('touchend', () => {
     const diff = touchStartX - touchEndX;
