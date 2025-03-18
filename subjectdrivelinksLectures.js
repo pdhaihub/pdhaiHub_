@@ -13,12 +13,12 @@ const subjectDriveLinks = {
 
         /* Semester 2 */
         2: {
-            "software-development-fundamentals-–-ii": "https://drive.google.com/drive/folders/TEMP_CSE_SDF2",
-            "electrical-science-1": "https://drive.google.com/drive/folders/TEMP_CSE_ELEC_SCIENCE1",
-            "mathematics-2": "https://drive.google.com/drive/folders/TEMP_CSE_MATH2",
-            "physics-2": "https://drive.google.com/drive/folders/TEMP_CSE_PHYSICS2",
-            "edd": "https://drive.google.com/drive/folders/TEMP_CSE_EDD",
-            "life-skills-and-effective-communication": "https://drive.google.com/drive/folders/TEMP_CSE_LIFE_SKILLS"
+            "mathematics-ii": "https://drive.google.com/drive/folders/1g3XEfj_SbFLdgmys2Cog0mJPDZUgbO_K",
+            "sdf-2": "https://drive.google.com/drive/folders/1KlYmfTrOd6xMqrD0ZI-kIfUcSk4gCQ52",
+            "electrical-science-1": "https://drive.google.com/drive/folders/1ongB0mRmhxX0XCkh05yHPrmtXQs2GdoR",
+            "physics-2": "https://drive.google.com/drive/folders/1h9Qbam0z8rRkaIF3YBXQEhH9RXa4vwJW",
+            "edd": "https://drive.google.com/drive/folders/TEMP_ECE_EDD",
+            "life-skills-and-effective-communication": "https://drive.google.com/drive/folders/TEMP_ECE_LIFE_SKILLS"
         },
 
         /* Semester 3 */

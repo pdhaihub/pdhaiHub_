@@ -307,6 +307,23 @@ function populateSubjects(testSelect, semester, type) {
     });
 }
 
+function populateSemesters(select) {
+
+  
+    if (!select) {
+        console.error("Semester select dropdown not found!");
+        return;
+    }
+
+    select.innerHTML = '<option value="">Select Semester</option>';
+    for (let i = 1; i <= 8; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `Semester ${i}`;
+        select.appendChild(option);
+    }
+}
+
 function getSubjectsBySemesterAndStream(stream, semester, type) {
     if (type === 'lectures') {
         return lectureSubjectsBySemester[stream]?.[semester] || [];
@@ -405,7 +422,7 @@ function initializeLectures() {
     semesterSelect.addEventListener("change", () => {
         testSelect.disabled = !semesterSelect.value;
         downloadBtn.disabled = true;
-        populateSubjects(testSelect, semesterSelect.value, 'lectures');
+        populateSubjects1(testSelect, semesterSelect.value, 'lectures');
     });
 
     testSelect.addEventListener("change", () => {
@@ -414,6 +431,27 @@ function initializeLectures() {
     
     document.getElementById("lectureDownloadBtn").addEventListener("click", handleLectureDownload);
 
+}
+
+function populateSubjects1(testSelect, semester, type) {
+    testSelect.innerHTML = '<option value="">Select Subject</option>';
+
+    const streamSelect = document.getElementById(type === 'lectures' ? 'lectureStreamSelect' : 'tutorialStreamSelect');
+    const selectedStream = streamSelect.value;
+    
+    const subjects = getSubjectsBySemesterAndStream(selectedStream, semester, type);
+
+    if (subjects.length === 0) {
+        console.warn("No subjects found for:", selectedStream, semester, type);
+    }
+
+    subjects.forEach(subject => {
+        const option = document.createElement('option');
+        const formattedSubject = subject.toLowerCase().replace(/\s+/g, '-');
+        option.value = formattedSubject;
+        option.textContent = subject;
+        testSelect.appendChild(option);
+    });
 }
 
 function populateLectureSemesters() {
@@ -660,7 +698,7 @@ function initializeTutorialDownloads() {
     streamSelect.addEventListener("change", () => {
         if (streamSelect.value) {
             semesterSelect.disabled = false;
-            populateSemesters(semesterSelect, streamSelect.value);
+            populateSemestersnew(semesterSelect, streamSelect.value);
             subjectSelect.disabled = true;
             downloadBtn.disabled = true;
             if (linkStatus) linkStatus.innerHTML = "";
@@ -711,7 +749,7 @@ function initializeTutorialSolutions() {
     streamSelect.addEventListener("change", () => {
         if (streamSelect.value) {
             semesterSelect.disabled = false;
-            populateSemesters(semesterSelect, streamSelect.value);
+            populateSemestersnew(semesterSelect, streamSelect.value);
             subjectSelect.disabled = true;
             downloadBtn.disabled = true;
             if (linkStatus) linkStatus.innerHTML = "";
@@ -752,7 +790,7 @@ function initializeTutorialSolutions() {
     });
 }
 
-function populateSemesters(select, stream) {
+function populateSemestersnew(select, stream) {
     if (!select) {
         console.error("Semester select dropdown not found!");
         return;
