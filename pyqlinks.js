@@ -15,6 +15,33 @@ const pyqDriveLinks = {
 			T2: "https://drive.google.com/drive/folders/1nIhvTsqWOaTfLthM0eKEjr0epoOJmkkD",
 			T3: "https://drive.google.com/drive/folders/1nIhvTsqWOaTfLthM0eKEjr0epoOJmkkD",
 		},
+
+		4: {
+			T1: "https://drive.google.com/drive/folders/1k0yXBC_2uenTffjqZX6xIl398mc4yj0k",
+			T2: "https://drive.google.com/drive/folders/1Z7CHjeRi-rCpXwnjp7XrZem9mD0xEH_v",
+			T3: "https://drive.google.com/drive/folders/1Z7CHjeRi-rCpXwnjp7XrZem9mD0xEH_v",
+		},
+		5: {
+			T1: "https://drive.google.com/drive/folders/1NEKhRKLSkn70hPjd6rvE_kjZQ6BAHOsS",
+			T2: "https://drive.google.com/drive/folders/1V6gHZ4_ZbqZ6eFQ6rsNjUympGd0ULmqD",
+			T3: "https://drive.google.com/drive/folders/1f7_xAxGvzPkBpnsWmG_VnfzpknhSPNvz",
+		},
+		6: {
+			T1: "https://drive.google.com/drive/folders/1dp0h4MJREZR_WE1SB3-xq4niPPe0Qguy",
+			T2: "https://drive.google.com/drive/folders/1oKses3zzlM16OSgoRVNIXyWDTGl4flJC",
+			T3: "https://drive.google.com/drive/folders/1fMscf4vetmqPs1AnMvyoRd66Dg1obZiA",
+		},
+		7: {
+			T1: "https://drive.google.com/drive/folders/1VOSoCRQpPM6DNeaNBXUBde8iFYv_78J_",
+			T2: "https://drive.google.com/drive/folders/1GsSrmfKrdACGrH43p_I0hU-0X8HkUtb7",
+			T3: "https://drive.google.com/drive/folders/176qkExa6VyS7VdB1eYn72GO7Tkj0SGNm",
+		},
+		8: {
+			T1: "https://drive.google.com/drive/folders/1y3Ikj1WNmO4sy_LYQGuJLyBHA-5QfiLc",
+			T2: "https://drive.google.com/drive/folders/1KOQu_eqXk-T6h4vyDBFfenGOlFY2sRau",
+			T3: "https://drive.google.com/drive/folders/1mASeLdFrV9rPpAVTwPRjKVXywSnzU1rs",
+		},
+
 		// Add remaining semesters for CSE
 	},
 	ECE: {
@@ -40,13 +67,13 @@ const pyqDriveLinks = {
 		},
         5: {
 			T1: "https://drive.google.com/drive/folders/1SZom4AO-x1djV-T_W5TTduJzgBFVvf9x",
-			T2: "",
+			T2: "https://drive.google.com/drive/folders/1WfNZz-nVYUXf43N5cuWaxyL7aAF5qb8C",
 			T3: "https://drive.google.com/drive/folders/1ElwHnUKA1Em32-KNuKi2W9Yl_K_xqiBW",
 		},
         6: {
 			T1: "https://drive.google.com/drive/folders/1NdBje4uZf2rbb-89AcAJVexnaEI9Hehw",
-			T2: "",
-			T3: "",
+			T2: "https://drive.google.com/drive/folders/1wSNUcatJPT90kXbkf-Ia2sdD746rzBGq",
+			T3: "https://drive.google.com/drive/folders/1vwLTOb7LXBbIBi1lSaxYmwxvwZ_Dv02r",
 		},
 		// Add remaining semesters for ECE
 	},

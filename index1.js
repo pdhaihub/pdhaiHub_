@@ -500,26 +500,26 @@ function handleLectureDownload() {
 }
 
 /*----------------------------tutorial------------------------------------------------*/
-
 const tutorialSubjectsBySemester = {
     "CSE": {
-        1: ["Workshop", "SDF-1", "Physics-1", "Mathematics-1", "English", "Basic Electronics"],
-        2: ["Mathematics II", "SDF-2", "Electrical Science-1", "Physics-2", "EDD", "Life Skills And Effective Communication"],
+        1: ["economics", "es-1", "english", "Mathematics-1", "physics-1"],
+        2: ["Mathematics II", "SDF-2", "Electrical Science-2", "Physics-2"],
         // Add more semesters and subjects as needed
     },
     "ECE": {
-        1: ["Workshop", "SDF-1", "Physics-1", "Mathematics-1", "English", "Basic Electronics"],
-        2: ["Mathematics II", "SDF-2", "Electrical Science-1", "Physics-2", "EDD", "Life Skills And Effective Communication"],
+        1: ["economics", "es-1", "english", "Mathematics-1", "physics-1"],
+        2: ["Mathematics II", "Electrical Science-2", "Physics-2"],
+        3: ["digital communication", "digital-electronics", "microprocessor", "Prp","SNS"],
+        4: ["Analog_Communication", "Analog Electronics", "Digital Signal Processing", "VLSI"],
+        5: ["EMFT"],
         // Add more semesters and subjects as needed
     },
     "BIOTECH": {
-        1: ["Basic Mathematics-1", "Physics for Biotechnology", "Fundamentals of Computers & Programming - I", "English", "Workshop"],
-        2: ["Basic Mathematics-2", "Electrical Science -1", "Biophysical Techniques", "Fundamentals of Computers & Programming - II", "Engineering Drawing and Design", "Life skills and effective communication"],
+        1: ["economics", "es-1", "english", "Mathematics-1", "physics-1"],
+        2: ["Mathematics II", "SDF-2", "Electrical Science-2", "Physics-2"],
         // Add more semesters and subjects as needed
     }
 };
-
-
 
 
 function showTutorials() {
@@ -536,11 +536,7 @@ function showTutorials() {
                     <h3>Tutorials</h3>
                     <p>Download Tutorial Questions</p>
                 </div>
-                <div class="tutorial-card" onclick="showTutorialSolutions()">
-                    <i class="fas fa-lightbulb fa-3x"></i>
-                    <h3>Tutorial Solutions</h3>
-                    <p>Download Tutorial Solutions</p>
-                </div>
+               
             </div>
         </div>
     `;
@@ -607,15 +603,16 @@ function showTutorialDownloads() {
                     <option value="">Select Semester</option>
                 </select>
 
-                <select id="tutorialtestSelect" class="custom-select" disabled>
+                <select id="tutorialSubjectSelect" class="custom-select" disabled>
                     <option value="">Select Subject</option>
                 </select>
 
                 <button id="tutorialDownloadBtn" class="dock-style-btn" disabled>
-                    <i class="fas fa-download"></i>
-                    Show Tutorial
+                    <i class="fas fa-external-link-alt"></i>
+                    Show Tutorials
                 </button>
             </div>
+            <div id="tutorialLinkStatus" class="status-message"></div>
         </div>
     `;
     initializeTutorialDownloads();
@@ -638,15 +635,16 @@ function showTutorialSolutions() {
                     <option value="">Select Semester</option>
                 </select>
 
-                <select id="solutiontestSelect" class="custom-select" disabled>
+                <select id="solutionSubjectSelect" class="custom-select" disabled>
                     <option value="">Select Subject</option>
                 </select>
 
                 <button id="solutionDownloadBtn" class="dock-style-btn" disabled>
-                    <i class="fas fa-download"></i>
-                    Show Tut-Solution
+                    <i class="fas fa-external-link-alt"></i>
+                    Show Tutorial Soln
                 </button>
             </div>
+            <div id="solutionLinkStatus" class="status-message"></div>
         </div>
     `;
     initializeTutorialSolutions();
@@ -655,147 +653,204 @@ function showTutorialSolutions() {
 function initializeTutorialDownloads() {
     const streamSelect = document.getElementById("tutorialStreamSelect");
     const semesterSelect = document.getElementById("tutorialSemesterSelect");
-    const testSelect = document.getElementById("tutorialtestSelect");
+    const subjectSelect = document.getElementById("tutorialSubjectSelect");
     const downloadBtn = document.getElementById("tutorialDownloadBtn");
+    const linkStatus = document.getElementById("tutorialLinkStatus");
 
     streamSelect.addEventListener("change", () => {
         if (streamSelect.value) {
             semesterSelect.disabled = false;
-            populateSemesters(semesterSelect);
+            populateSemesters(semesterSelect, streamSelect.value);
+            subjectSelect.disabled = true;
+            downloadBtn.disabled = true;
+            if (linkStatus) linkStatus.innerHTML = "";
         } else {
             semesterSelect.disabled = true;
-            testSelect.disabled = true;
+            subjectSelect.disabled = true;
             downloadBtn.disabled = true;
         }
     });
 
     semesterSelect.addEventListener("change", () => {
         if (semesterSelect.value && streamSelect.value) {
-            testSelect.disabled = false;
-            populateSubjects(testSelect, semesterSelect.value, 'tutorials');
+            subjectSelect.disabled = false;
+            populateSubjects(subjectSelect, streamSelect.value, semesterSelect.value);
+            downloadBtn.disabled = true;
+            if (linkStatus) linkStatus.innerHTML = "";
         } else {
-            testSelect.disabled = true;
+            subjectSelect.disabled = true;
             downloadBtn.disabled = true;
         }
     });
 
-    testSelect.addEventListener("change", () => {
-        if (testSelect.value) {
+    subjectSelect.addEventListener("change", () => {
+        if (subjectSelect.value) {
             downloadBtn.disabled = false;
+            if (linkStatus) linkStatus.innerHTML = "";
         } else {
             downloadBtn.disabled = true;
         }
     });
 
-    downloadBtn.addEventListener("click", () => handleDownloadItem('tutorials', {
-        stream: streamSelect.value,
-        semester: semesterSelect.value,
-        subject: testSelect.options[testSelect.selectedIndex].text
-    }));
+    downloadBtn.addEventListener("click", () => {
+        const stream = streamSelect.value;
+        const semester = parseInt(semesterSelect.value);
+        const subject = subjectSelect.value;
+        
+        openDriveLink('tutorial', stream, semester, subject, linkStatus);
+    });
 }
 
 function initializeTutorialSolutions() {
     const streamSelect = document.getElementById("solutionStreamSelect");
     const semesterSelect = document.getElementById("solutionSemesterSelect");
-    const testSelect = document.getElementById("solutiontestSelect");
+    const subjectSelect = document.getElementById("solutionSubjectSelect");
     const downloadBtn = document.getElementById("solutionDownloadBtn");
+    const linkStatus = document.getElementById("solutionLinkStatus");
 
-    setupSelectionHandlers(streamSelect, semesterSelect, testSelect, downloadBtn, 'tutorials');
-}
-
-function initializeTutorials() {
-    const streamSelect = document.getElementById("tutorialStreamSelect");
-    const semesterSelect = document.getElementById("tutorialSemesterSelect");
-    const testSelect = document.getElementById("tutorialtestSelect");
-    const downloadBtn = document.getElementById("tutorialDownloadBtn");
-
-    streamSelect.addEventListener("change", () => {
-        semesterSelect.disabled = !streamSelect.value;
-        testSelect.disabled = true;
-        downloadBtn.disabled = true;
-        populateTutorialSemesters();
-    });
-
-    semesterSelect.addEventListener("change", () => {
-        testSelect.disabled = !semesterSelect.value;
-        downloadBtn.disabled = true;
-        populateSubjects(testSelect, semesterSelect.value, 'tutorials');
-    });
-
-    testSelect.addEventListener("change", () => {
-        downloadBtn.disabled = !testSelect.value;
-    });
-}
-
-function setupSelectionHandlers(streamSelect, semesterSelect, testSelect, downloadBtn, type) {
     streamSelect.addEventListener("change", () => {
         if (streamSelect.value) {
             semesterSelect.disabled = false;
-            populateSemesters(semesterSelect);
+            populateSemesters(semesterSelect, streamSelect.value);
+            subjectSelect.disabled = true;
+            downloadBtn.disabled = true;
+            if (linkStatus) linkStatus.innerHTML = "";
         } else {
             semesterSelect.disabled = true;
-            testSelect.disabled = true;
+            subjectSelect.disabled = true;
             downloadBtn.disabled = true;
         }
     });
 
     semesterSelect.addEventListener("change", () => {
-        if (semesterSelect.value) {
-            testSelect.disabled = false;
-            populateSubjects(testSelect, semesterSelect.value, type);
+        if (semesterSelect.value && streamSelect.value) {
+            subjectSelect.disabled = false;
+            populateSubjects(subjectSelect, streamSelect.value, semesterSelect.value);
+            downloadBtn.disabled = true;
+            if (linkStatus) linkStatus.innerHTML = "";
         } else {
-            testSelect.disabled = true;
+            subjectSelect.disabled = true;
             downloadBtn.disabled = true;
         }
     });
 
-    testSelect.addEventListener("change", () => {
-        downloadBtn.disabled = !testSelect.value;
+    subjectSelect.addEventListener("change", () => {
+        if (subjectSelect.value) {
+            downloadBtn.disabled = false;
+            if (linkStatus) linkStatus.innerHTML = "";
+        } else {
+            downloadBtn.disabled = true;
+        }
     });
 
-    downloadBtn.addEventListener("click", () => handleDownloadItem(type, {
-        stream: streamSelect.value,
-        semester: semesterSelect.value,
-        subject: testSelect.options[testSelect.selectedIndex].text
-    }));
+    downloadBtn.addEventListener("click", () => {
+        const stream = streamSelect.value;
+        const semester = parseInt(semesterSelect.value);
+        const subject = subjectSelect.value;
+        
+        openDriveLink('solution', stream, semester, subject, linkStatus);
+    });
 }
 
-
-function populateSemesters(select) {
-
-  
+function populateSemesters(select, stream) {
     if (!select) {
         console.error("Semester select dropdown not found!");
         return;
     }
 
     select.innerHTML = '<option value="">Select Semester</option>';
-    for (let i = 1; i <= 8; i++) {
+    
+    // Get available semesters for the selected stream
+    const semesters = Object.keys(tutorialSubjectsBySemester[stream] || {}).map(Number).sort((a, b) => a - b);
+    
+    for (const semester of semesters) {
         const option = document.createElement('option');
-        option.value = i;
-        option.textContent = `Semester ${i}`;
+        option.value = semester;
+        option.textContent = `Semester ${semester}`;
         select.appendChild(option);
     }
 }
 
+function populateSubjects(select, stream, semester) {
+    if (!select) {
+        console.error("Subject select dropdown not found!");
+        return;
+    }
 
-
-
-function populateItems(select, type) {
-    select.innerHTML = `<option value="">Select ${type === 'tutorial' ? 'Tutorial' : 'Solution'}</option>`;
-    for (let i = 1; i <= 12; i++) {
+    select.innerHTML = '<option value="">Select Subject</option>';
+    
+    const subjects = tutorialSubjectsBySemester[stream]?.[semester] || [];
+    
+    for (const subject of subjects) {
         const option = document.createElement('option');
-        option.value = `${type}-${i}`;
-        option.textContent = `${type === 'tutorial' ? 'Tutorial' : 'Solution'} ${i}`;
+        option.value = subject;
+        option.textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
         select.appendChild(option);
     }
 }
 
-function handleDownloadItem(type, info) {
-    console.log(`Downloading ${type}: ${info.stream} - Semester ${info.semester} - ${info.subject}`);
-    alert(`Download started for:\n${info.stream} - Semester ${info.semester} - ${info.subject}`);
+function openDriveLink(type, stream, semester, subject, statusElement) {
+    let link;
+    
+    if (type === 'tutorial') {
+        link = tutorialDriveLinks[stream]?.[semester]?.[subject];
+    } else if (type === 'solution') {
+        link = tutorialSolutionDriveLinks[stream]?.[semester]?.[subject];
+    }
+    
+    if (link) {
+        // Open the link in a new tab
+        window.open(link, '_blank');
+        
+        if (statusElement) {
+            statusElement.innerHTML = `
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    Opening Drive folder for ${stream} - Semester ${semester} - ${subject}
+                </div>
+            `;
+        }
+    } else {
+        console.error(`No drive link found for ${stream} - Semester ${semester} - ${subject}`);
+        
+        if (statusElement) {
+            statusElement.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    No drive link found for this selection. Please contact administrator.
+                </div>
+            `;
+        }
+    }
 }
 
+// Add this style for status messages
+const statusStyle = document.createElement('style');
+statusStyle.textContent = `
+    .status-message {
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    .success-message {
+        color: #4CAF50;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgba(76, 175, 80, 0.1);
+    }
+    
+    .error-message {
+        color: #f44336;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgba(244, 67, 54, 0.1);
+    }
+    
+    .status-message i {
+        margin-right: 5px;
+    }
+`;
+document.head.appendChild(statusStyle);
 /*------------------------professors------------------------*/
 
 function showProfessors() {
