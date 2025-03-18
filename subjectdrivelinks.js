@@ -129,7 +129,7 @@ const subjectDriveLinks = {
         /* Semester 6 */
         6: {
             "medical-and-industrial-applications-of-nuclear-radiations": "https://drive.google.com/drive/folders/TEMP_ECE_MEDICAL_NUCLEAR",
-            "vlsi": "https://drive.google.com/drive/folders/TEMP_ECE_VLSI",
+            "vlsi": "https://drive.google.com/drive/folders/1O-fcMq1VAmdQK-bkV5-wWLQipZDeFgVj",
             "front-end-programming": "https://drive.google.com/drive/folders/TEMP_ECE_FRONT_END",
             "development-issues-&-rural-engineering": "https://drive.google.com/drive/folders/TEMP_ECE_DEVELOPMENT",
             "semiconductor": "https://drive.google.com/drive/folders/TEMP_ECE_SEMICONDUCTOR",
