@@ -495,7 +495,7 @@ const lectureSubjectsBySemester ={
             3: ["Electrical Science-2", "Economics", "PRP", "SNS", "DCD", "Environmental Studies", "PCP"],
             4: ["AE", "DSP", "FA", "ADC"],
             5: ["DSA", "Sociology of Media", "Nuclear Science & Engineering", "EMFT", "DIP", "Indian Constitution & Traditional Knowledge"],
-            6: ["Medical And Industrial Applications of Nuclear Radiations", "VLSI", "Front-End Programming", "Development Issues & Rural Engineering", "Semiconductor", "Fundamentals of EV"],
+            6: ["tcn","Medical And Industrial Applications of Nuclear Radiations", "VLSI", "Front-End Programming", "Development Issues & Rural Engineering", "Semiconductor", "Fundamentals of EV"],
             7: ["Distributed Systems", "Blockchain Technology", "Cybersecurity", "IoT"],
             8: ["Big Data", "Quantum Computing", "Natural Language Processing", "Advanced Algorithms"]
         },

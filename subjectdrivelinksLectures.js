@@ -133,7 +133,8 @@ const subjectDriveLinks = {
             "front-end-programming": "https://drive.google.com/drive/folders/TEMP_ECE_FRONT_END",
             "development-issues-&-rural-engineering": "https://drive.google.com/drive/folders/TEMP_ECE_DEVELOPMENT",
             "semiconductor": "https://drive.google.com/drive/folders/TEMP_ECE_SEMICONDUCTOR",
-            "fundamentals-of-ev": "https://drive.google.com/drive/folders/TEMP_ECE_EV"
+            "fundamentals-of-ev": "https://drive.google.com/drive/folders/TEMP_ECE_EV",
+            "tcn":"https://drive.google.com/drive/folders/1nCGqPHIIcIaUMTQdgHSnuJqKynEE6ssH",
         },
 
         /* Semester 7 */
