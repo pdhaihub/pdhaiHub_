@@ -41,7 +41,12 @@ const tutorialDriveLinks = {
             , "Digital Signal Processing":"https://drive.google.com/drive/folders/1Z-TAVvuzKc6dSD52EAxVsa59kgZIEKHu"
             , "VLSI":"https://drive.google.com/drive/folders/1FBzikcQZRUpT5F66dOhdf8XJQZFN5qCp"
         },
-        5: {"EMFT":"https://drive.google.com/drive/folders/1FAL6P7n_h725cryJMVffHkrrkptUwQoA"}
+        5: {"EMFT":"https://drive.google.com/drive/folders/1FAL6P7n_h725cryJMVffHkrrkptUwQoA"},
+
+        6:{
+            "vlsi":"https://drive.google.com/drive/folders/1S8inpOexB8TIP7y8KLrCFDDRkeEK3-Ej",
+            "tcn":"https://drive.google.com/drive/folders/1BAGxtSHBHtJuhoAY6cO7scwcopsvHD-0"
+        }
 
 
         // Add the rest of the semester/subject links

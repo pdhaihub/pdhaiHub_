@@ -550,6 +550,7 @@ const tutorialSubjectsBySemester = {
         3: ["digital communication", "digital-electronics", "microprocessor", "Prp","SNS"],
         4: ["Analog_Communication", "Analog Electronics", "Digital Signal Processing", "VLSI"],
         5: ["EMFT"],
+        6:["vlsi","tcn"]
         // Add more semesters and subjects as needed
     },
     "BIOTECH": {
