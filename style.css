@@ -10,7 +10,7 @@
     overflow: hidden;
 } */
 :root {
-    --primary-color: green;
+    --primary-color: aliceblue;
     --secondary-color: #000000;
     --text-light: #ffffff;
     --text-dark: #000000;
@@ -729,4 +729,5 @@ a{
         margin-bottom: 0.5rem; /* Add spacing between inputs */
     }
 }
+
 
